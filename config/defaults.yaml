@@ -1,0 +1,6 @@
+---
+component: 'test'
+deployment_identifier: "%{hiera('deployment_identifier')}"
+
+work_directory: 'build'
+configuration_directory: "%{hiera('work_directory')}/%{hiera('source_directory')}"
