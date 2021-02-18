@@ -5,6 +5,8 @@ require 'rake_terraform'
 require 'rake_circle_ci'
 require 'rake_github'
 require 'rake_ssh'
+require 'rake_gpg'
+require 'securerandom'
 require 'rspec/core/rake_task'
 
 require_relative 'lib/configuration'
@@ -28,11 +30,32 @@ RakeTerraform.define_installation_tasks(
     path: File.join(Dir.pwd, 'vendor', 'terraform'),
     version: '0.12.17')
 
-RakeSSH.define_key_tasks(
-    namespace: :deploy_key,
-    path: 'config/secrets/ci/',
-    comment: 'maintainers@infrablocks.io'
-)
+namespace :encryption do
+  namespace :passphrase do
+    task :generate do
+      File.open('config/secrets/ci/encryption.passphrase', 'w') do |f|
+        f.write(SecureRandom.base64(36))
+      end
+    end
+  end
+end
+
+namespace :keys do
+  namespace :deploy do
+    RakeSSH.define_key_tasks(
+        path: 'config/secrets/ci/',
+        comment: 'maintainers@infrablocks.io')
+  end
+
+  namespace :gpg do
+    RakeGPG.define_generate_key_task(
+        output_directory: 'config/secrets/ci',
+        name_prefix: 'gpg',
+        owner_name: 'InfraBlocks Maintainers',
+        owner_email: 'maintainers@infrablocks.io',
+        owner_comment: 'terraform-mongodbatlas-project CI Key')
+  end
+end
 
 RakeCircleCI.define_project_tasks(
     namespace: :circle_ci,
@@ -47,6 +70,7 @@ RakeCircleCI.define_project_tasks(
           File.read('config/secrets/ci/encryption.passphrase')
               .chomp
   }
+  t.checkout_keys = []
   t.ssh_keys = [
       {
           hostname: "github.com",
@@ -73,7 +97,9 @@ end
 
 namespace :pipeline do
   task :prepare => [
+      :'circle_ci:project:follow',
       :'circle_ci:env_vars:ensure',
+      :'circle_ci:checkout_keys:ensure',
       :'circle_ci:ssh_keys:ensure',
       :'github:deploy_keys:ensure'
   ]
