@@ -4,3 +4,19 @@ deployment_identifier: "%{hiera('deployment_identifier')}"
 
 work_directory: 'build'
 configuration_directory: "%{hiera('work_directory')}/%{hiera('source_directory')}"
+
+organization_id: "602e67f467852d083d43a50f"
+
+dedicated_teams:
+  - name_suffix: "developers"
+    usernames:
+      - "toby+user1@go-atomic.io"
+      - "toby+user2@go-atomic.io"
+    roles:
+      - "GROUP_DATA_ACCESS_ADMIN"
+      - "GROUP_CLUSTER_MANAGER"
+  - name_suffix: "admins"
+    usernames:
+      - "toby+user3@go-atomic.io"
+    roles:
+      - "GROUP_OWNER"

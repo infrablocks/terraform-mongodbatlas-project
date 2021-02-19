@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'ruby_terraform'
 
 require 'support/shared_contexts/terraform'
+require 'support/shared_contexts/mongo_db_atlas'
 require 'support/terraform_module'
 
 RubyTerraform.configure do |c|
@@ -23,6 +24,7 @@ RSpec.configure do |config|
   end
 
   config.include_context :terraform
+  config.include_context :mongo_db_atlas
 
   config.before(:suite) do
     TerraformModule.provision_for(:prerequisites)
