@@ -20,3 +20,17 @@ dedicated_teams:
       - "toby+user3@go-atomic.io"
     roles:
       - "GROUP_OWNER"
+
+ip_access_list:
+  - type: "cidr-block"
+    value: "10.0.0.0/8"
+    comment: "Private network 1"
+  - type: "cidr-block"
+    value: "192.168.0.0/16"
+    comment: "Private network 2"
+  - type: "ip-address"
+    value: "1.1.1.1"
+    comment: "Public IP 1"
+  - type: "ip-address"
+    value: "2.2.2.2"
+    comment: "Public IP 2"

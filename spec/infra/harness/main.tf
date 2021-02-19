@@ -7,4 +7,6 @@ module "project" {
   organization_id = var.organization_id
 
   dedicated_teams = var.dedicated_teams
+
+  ip_access_list = var.ip_access_list
 }

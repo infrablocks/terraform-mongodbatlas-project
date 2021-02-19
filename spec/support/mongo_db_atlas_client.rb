@@ -17,6 +17,10 @@ class MongoDBAtlasClient
         get("/groups/#{project_id}").body)
   end
 
+  def get_project_ip_access_list(project_id)
+    JSON.parse(get("/groups/#{project_id}/accessList").body)
+  end
+
   def get_all_teams_assigned_to_project(project_id)
     JSON.parse(get("/groups/#{project_id}/teams").body)
   end

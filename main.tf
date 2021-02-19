@@ -3,6 +3,18 @@ locals {
     for dedicated_team in var.dedicated_teams:
       "${var.component}-${var.deployment_identifier}-${dedicated_team.name_suffix}" => dedicated_team
   }
+
+  cidr_block_entries = {
+    for entry in var.ip_access_list:
+        entry.value => entry
+    if entry.type == "cidr-block"
+  }
+
+  ip_address_entries = {
+    for entry in var.ip_access_list:
+        entry.value => entry
+    if entry.type == "ip-address"
+  }
 }
 
 resource "mongodbatlas_team" "team" {
@@ -24,4 +36,20 @@ resource "mongodbatlas_project" "project" {
       role_names = teams.value.roles
     }
   }
+}
+
+resource "mongodbatlas_project_ip_access_list" "cidr_block_entry" {
+  for_each = local.cidr_block_entries
+
+  project_id = mongodbatlas_project.project.id
+  cidr_block = each.key
+  comment    = each.value.comment
+}
+
+resource "mongodbatlas_project_ip_access_list" "ip_address_entry" {
+  for_each = local.ip_address_entries
+
+  project_id = mongodbatlas_project.project.id
+  ip_address = each.key
+  comment    = each.value.comment
 }

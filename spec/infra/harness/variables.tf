@@ -10,3 +10,11 @@ variable "dedicated_teams" {
     roles: list(string)
   }))
 }
+
+variable "ip_access_list" {
+  type = list(object({
+    type: string,
+    value: string,
+    comment: string
+  }))
+}

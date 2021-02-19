@@ -9,3 +9,5 @@ vars:
   organization_id: "%{hiera('organization_id')}"
 
   dedicated_teams: "%{hiera('dedicated_teams')}"
+
+  ip_access_list: "%{hiera('ip_access_list')}"

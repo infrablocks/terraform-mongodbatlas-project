@@ -19,4 +19,15 @@ variable "dedicated_teams" {
     roles: list(string)
   }))
   description = "A list of teams to be created and associated with the project with corresponding roles."
+  default = []
+}
+
+variable "ip_access_list" {
+  type = list(object({
+    type: string,
+    value: string,
+    comment: string
+  }))
+  description = "A list of IP access list entries to add to the project."
+  default = []
 }
