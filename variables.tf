@@ -12,13 +12,21 @@ variable "organization_id" {
   description = "The ID of the organization within which to create the project."
 }
 
+variable "existing_teams" {
+  type = list(object({
+    id: string,
+    roles: list(string)
+  }))
+  description = "A list of existing teams to be associated with the project with corresponding roles."
+  default = []
+}
 variable "dedicated_teams" {
   type = list(object({
     name_suffix: string,
     usernames: list(string),
     roles: list(string)
   }))
-  description = "A list of teams to be created and associated with the project with corresponding roles."
+  description = "A list of dedicated teams to be created and associated with the project with corresponding roles."
   default = []
 }
 

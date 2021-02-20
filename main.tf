@@ -4,6 +4,10 @@ locals {
       "${var.component}-${var.deployment_identifier}-${dedicated_team.name_suffix}" => dedicated_team
   }
 
+  existing_teams = {
+    for existing_team in var.existing_teams: existing_team.id => existing_team
+  }
+
   cidr_block_entries = {
     for entry in var.ip_access_list:
         entry.value => entry
@@ -33,6 +37,14 @@ resource "mongodbatlas_project" "project" {
     for_each = local.dedicated_teams
     content {
       team_id = mongodbatlas_team.team[teams.key].team_id
+      role_names = teams.value.roles
+    }
+  }
+
+  dynamic "teams" {
+    for_each = local.existing_teams
+    content {
+      team_id = teams.key
       role_names = teams.value.roles
     }
   }
