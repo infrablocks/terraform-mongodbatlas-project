@@ -11,12 +11,12 @@ existing_teams:
   - name: "support"
     usernames:
       - "toby+user1@go-atomic.io"
-    roles:
+    role_names:
       - "GROUP_DATA_ACCESS_READ_ONLY"
   - name: "billing"
     usernames:
       - "toby+user2@go-atomic.io"
-    roles:
+    role_names:
       - "GROUP_READ_ONLY"
 
 dedicated_teams:
@@ -24,13 +24,13 @@ dedicated_teams:
     usernames:
       - "toby+user1@go-atomic.io"
       - "toby+user2@go-atomic.io"
-    roles:
+    role_names:
       - "GROUP_DATA_ACCESS_ADMIN"
       - "GROUP_CLUSTER_MANAGER"
   - name_suffix: "admins"
     usernames:
       - "toby+user3@go-atomic.io"
-    roles:
+    role_names:
       - "GROUP_OWNER"
 
 ip_access_list:

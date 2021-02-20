@@ -34,7 +34,7 @@ describe 'Project' do
 
       expect(project_team).not_to(be_nil)
       expect(project_team["roleNames"])
-          .to(contain_exactly(*dedicated_team["roles"]))
+          .to(contain_exactly(*dedicated_team["role_names"]))
     end
   end
 
@@ -53,7 +53,7 @@ describe 'Project' do
 
       expect(project_team).not_to(be_nil)
       expect(project_team["roleNames"])
-          .to(contain_exactly(*existing_team["roles"]))
+          .to(contain_exactly(*existing_team["role_names"]))
     end
   end
 end

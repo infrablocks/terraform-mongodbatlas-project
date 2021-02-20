@@ -1,9 +1,9 @@
 locals {
   existing_teams = [
-    for existing_team in var.existing_teams: {
-      id: data.terraform_remote_state.prerequisites.outputs.existing_teams[existing_team.name].id,
-      roles: existing_team.roles
-    }
+  for existing_team in var.existing_teams: {
+    id: data.terraform_remote_state.prerequisites.outputs.existing_teams[existing_team.name].id,
+    role_names: existing_team.role_names
+  }
   ]
 }
 
@@ -18,12 +18,12 @@ data "terraform_remote_state" "prerequisites" {
 module "project" {
   source = "../../../../"
 
-  component = var.component
+  component             = var.component
   deployment_identifier = var.deployment_identifier
 
   organization_id = var.organization_id
 
-  existing_teams = local.existing_teams
+  existing_teams  = local.existing_teams
   dedicated_teams = var.dedicated_teams
 
   ip_access_list = var.ip_access_list

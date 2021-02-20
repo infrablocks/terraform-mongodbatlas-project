@@ -37,7 +37,7 @@ resource "mongodbatlas_project" "project" {
     for_each = local.dedicated_teams
     content {
       team_id = mongodbatlas_team.team[teams.key].team_id
-      role_names = teams.value.roles
+      role_names = teams.value.role_names
     }
   }
 
@@ -45,7 +45,7 @@ resource "mongodbatlas_project" "project" {
     for_each = local.existing_teams
     content {
       team_id = teams.key
-      role_names = teams.value.roles
+      role_names = teams.value.role_names
     }
   }
 }

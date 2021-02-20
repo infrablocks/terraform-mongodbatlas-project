@@ -8,34 +8,34 @@ variable "deployment_identifier" {
 }
 
 variable "organization_id" {
-  type = string
+  type        = string
   description = "The ID of the organization within which to create the project."
 }
 
 variable "existing_teams" {
-  type = list(object({
+  type        = list(object({
     id: string,
-    roles: list(string)
+    role_names: list(string)
   }))
   description = "A list of existing teams to be associated with the project with corresponding roles."
-  default = []
+  default     = []
 }
 variable "dedicated_teams" {
-  type = list(object({
+  type        = list(object({
     name_suffix: string,
     usernames: list(string),
-    roles: list(string)
+    role_names: list(string)
   }))
   description = "A list of dedicated teams to be created and associated with the project with corresponding roles."
-  default = []
+  default     = []
 }
 
 variable "ip_access_list" {
-  type = list(object({
+  type        = list(object({
     type: string,
     value: string,
     comment: string
   }))
   description = "A list of IP access list entries to add to the project."
-  default = []
+  default     = []
 }

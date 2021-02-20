@@ -7,7 +7,7 @@ variable "existing_teams" {
   type = list(object({
     name: string,
     usernames: list(string)
-    roles: list(string)
+    role_names: list(string)
   }))
 }
 
@@ -15,7 +15,7 @@ variable "dedicated_teams" {
   type = list(object({
     name_suffix: string,
     usernames: list(string)
-    roles: list(string)
+    role_names: list(string)
   }))
 }
 
