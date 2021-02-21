@@ -8,12 +8,12 @@ configuration_directory: "%{hiera('work_directory')}/%{hiera('source_directory')
 organization_id: "602e67f467852d083d43a50f"
 
 existing_teams:
-  - name: "support"
+  - name: "%{hiera('component')}-%{hiera('deployment_identifier')}-support"
     usernames:
       - "toby+user1@go-atomic.io"
     role_names:
       - "GROUP_DATA_ACCESS_READ_ONLY"
-  - name: "billing"
+  - name: "%{hiera('component')}-%{hiera('deployment_identifier')}-billing"
     usernames:
       - "toby+user2@go-atomic.io"
     role_names:
