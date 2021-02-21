@@ -26,3 +26,20 @@ variable "ip_access_list" {
     comment: string
   }))
 }
+
+variable "database_users" {
+  type = list(object({
+    username: string,
+    password: string,
+    roles: list(object({
+      role_name: string,
+      database_name: string,
+      collection_name: string
+    })),
+    labels: map(string),
+    scopes: list(object({
+      type: string,
+      name: string
+    }))
+  }))
+}

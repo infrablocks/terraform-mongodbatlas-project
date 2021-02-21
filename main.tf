@@ -19,6 +19,11 @@ locals {
         entry.value => entry
     if entry.type == "ip-address"
   }
+
+  database_users = {
+    for database_user in var.database_users:
+      database_user.username => database_user
+  }
 }
 
 resource "mongodbatlas_team" "team" {
@@ -64,4 +69,40 @@ resource "mongodbatlas_project_ip_access_list" "ip_address_entry" {
   project_id = mongodbatlas_project.project.id
   ip_address = each.key
   comment    = each.value.comment
+}
+
+resource "mongodbatlas_database_user" "user" {
+  for_each = local.database_users
+
+  project_id = mongodbatlas_project.project.id
+  username = each.key
+  password = each.value.password
+  auth_database_name = "admin"
+
+  dynamic "roles" {
+    for_each = each.value.roles
+
+    content {
+      role_name = roles.value.role_name
+      database_name = roles.value.database_name
+      collection_name = roles.value.collection_name
+    }
+  }
+
+  dynamic "labels" {
+    for_each = each.value.labels
+    content {
+      key = labels.key
+      value = labels.value
+    }
+  }
+
+  dynamic "scopes" {
+    for_each = { for scope in each.value.scopes: "${scope.type}-${scope.name}" => scope }
+
+    content {
+      name = scopes.value.name
+      type = scopes.value.type
+    }
+  }
 }

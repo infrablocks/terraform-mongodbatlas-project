@@ -27,4 +27,6 @@ module "project" {
   dedicated_teams = var.dedicated_teams
 
   ip_access_list = var.ip_access_list
+
+  database_users = var.database_users
 }

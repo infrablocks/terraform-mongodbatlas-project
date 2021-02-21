@@ -46,3 +46,28 @@ ip_access_list:
   - type: "ip-address"
     value: "2.2.2.2"
     comment: "Public IP 2"
+
+database_users:
+  - username: "user-1"
+    password: "password-1"
+    roles:
+      - role_name: "readAnyDatabase"
+        database_name: "admin"
+        collection_name: ""
+      - role_name: "readWrite"
+        database_name: "specific"
+        collection_name: "things"
+    labels:
+      component: "%{hiera('component')}"
+      deployment_identifier: "%{hiera('deployment_identifier')}"
+    scopes: []
+  - username: "user-2"
+    password: "password-2"
+    roles:
+      - role_name: "dbAdmin"
+        database_name: "specific"
+        collection_name: ""
+    labels: {}
+    scopes:
+      - type: "CLUSTER"
+        name: "some-cluster"

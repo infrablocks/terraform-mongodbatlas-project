@@ -12,3 +12,5 @@ vars:
   dedicated_teams: "%{hiera('dedicated_teams')}"
 
   ip_access_list: "%{hiera('ip_access_list')}"
+
+  database_users: "%{hiera('database_users')}"

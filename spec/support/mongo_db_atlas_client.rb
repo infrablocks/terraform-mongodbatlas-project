@@ -21,6 +21,11 @@ class MongoDBAtlasClient
     JSON.parse(get("/groups/#{project_id}/accessList").body)
   end
 
+  def get_one_database_user(project_id, username)
+    JSON.parse(
+        get("/groups/#{project_id}/databaseUsers/admin/#{username}").body)
+  end
+
   def get_all_teams_assigned_to_project(project_id)
     JSON.parse(get("/groups/#{project_id}/teams").body)
   end

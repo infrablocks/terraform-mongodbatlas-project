@@ -39,3 +39,22 @@ variable "ip_access_list" {
   description = "A list of IP access list entries to add to the project."
   default     = []
 }
+
+variable "database_users" {
+  type        = list(object({
+    username: string,
+    password: string,
+    roles: list(object({
+      role_name: string,
+      database_name: string,
+      collection_name: string
+    })),
+    labels: map(string),
+    scopes: list(object({
+      type: string,
+      name: string
+    }))
+  }))
+  description = "A list of database users to create for the project"
+  default     = []
+}
