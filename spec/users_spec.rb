@@ -61,6 +61,25 @@ describe 'Users' do
     end
   end
 
+  it 'adds default labels to database users' do
+    database_users.each do |database_user|
+      found_database_user = mongo_db_atlas_client
+          .get_one_database_user(project_id, database_user["username"])
+      found_labels = found_database_user["labels"]
+
+      {
+          "Component" => component,
+          "DeploymentIdentifier" => deployment_identifier
+      }.each do |key, value|
+        found_label = found_labels.find do |found_label|
+          found_label["key"] == key
+        end
+
+        expect(found_label["value"]).to(eq(value))
+      end
+    end
+  end
+
   it 'adds all requested scopes to database users' do
     database_users.each do |database_user|
       found_database_user = mongo_db_atlas_client

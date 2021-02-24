@@ -58,8 +58,8 @@ database_users:
         database_name: "specific"
         collection_name: "things"
     labels:
-      component: "%{hiera('component')}"
-      deployment_identifier: "%{hiera('deployment_identifier')}"
+      important: "thing"
+      something: "else"
     scopes: []
   - username: "user-2"
     password: "password-2"

@@ -58,3 +58,9 @@ variable "database_users" {
   description = "A list of database users to create for the project"
   default     = []
 }
+
+variable "labels" {
+  description = "A map of labels to be applied to created resources, in addition to the defaults."
+  type        = map(string)
+  default     = {}
+}

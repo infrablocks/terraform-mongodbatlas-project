@@ -90,7 +90,7 @@ resource "mongodbatlas_database_user" "user" {
   }
 
   dynamic "labels" {
-    for_each = each.value.labels
+    for_each = merge(local.labels, each.value.labels)
     content {
       key = labels.key
       value = labels.value
