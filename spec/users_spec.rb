@@ -9,7 +9,7 @@ describe 'Users' do
   let(:database_users) { vars.database_users }
 
   let(:project_id) {
-    output_for(:harness, "project_id", parse: true)
+    output_for(:harness, "project_id")
   }
 
   it 'creates the requested database users' do

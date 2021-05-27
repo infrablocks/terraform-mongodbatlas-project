@@ -9,7 +9,7 @@ describe 'Teams' do
   let(:dedicated_teams) { vars.dedicated_teams }
 
   let(:dedicated_teams_ids) do
-    output_for(:harness, "dedicated_teams", parse: true)
+    output_for(:harness, "dedicated_teams")
   end
 
   it 'creates each of the provided dedicated teams' do

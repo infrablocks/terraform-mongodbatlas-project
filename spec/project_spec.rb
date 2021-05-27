@@ -6,7 +6,7 @@ describe 'Project' do
 
   let(:organization_id) { vars.organization_id }
   let(:project_id) {
-    output_for(:harness, "project_id", parse: true)
+    output_for(:harness, "project_id")
   }
 
   let(:existing_teams) { vars.existing_teams }
