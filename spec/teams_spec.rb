@@ -38,7 +38,7 @@ describe 'Teams' do
               organization_id,
               team_name)
 
-      expect(dedicated_teams_ids[team_name]["id"])
+      expect(dedicated_teams_ids[team_name.to_sym][:id])
           .to(eq(found_team["id"]))
     end
   end
