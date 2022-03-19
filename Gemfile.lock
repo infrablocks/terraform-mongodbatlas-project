@@ -18,8 +18,8 @@ GEM
     evalhook (0.6.0)
       partialruby (~> 0.3)
       sexp_processor (~> 4.0)
-    excon (0.81.0)
-    faraday (1.9.3)
+    excon (0.92.0)
+    faraday (1.10.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -47,7 +47,7 @@ GEM
       rchardet (~> 1.8)
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
-    hiera (3.7.0)
+    hiera (3.8.0)
     httparty (0.20.0)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
@@ -64,6 +64,12 @@ GEM
     minitest (5.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    nokogiri (1.13.3-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.3-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.3-x86_64-linux)
+      racc (~> 1.4)
     octokit (4.22.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
@@ -72,13 +78,14 @@ GEM
       ruby2ruby (~> 2)
       ruby_parser (~> 3)
     public_suffix (4.0.6)
+    racc (1.6.0)
     rake (13.0.6)
     rake_circle_ci (0.9.0)
       colored2 (~> 3.1)
       excon (~> 0.72)
       rake_factory (~> 0.23)
       sshkey (~> 2.0)
-    rake_dependencies (2.13.0)
+    rake_dependencies (3.1.0)
       hamster (~> 3.0)
       minitar (~> 0.9)
       rake_factory (~> 0.23)
@@ -98,9 +105,9 @@ GEM
       colored2 (~> 3.1)
       rake_factory (~> 0.23)
       sshkey (~> 2.0)
-    rake_terraform (1.21.0)
+    rake_terraform (1.22.0)
       colored2 (~> 3.1)
-      rake_dependencies (~> 2.11)
+      rake_dependencies (~> 3.1)
       rake_factory (~> 0.23)
       ruby-terraform (~> 1.4)
     rchardet (1.8.0)
@@ -126,14 +133,14 @@ GEM
       sexp_processor (~> 4.6)
     ruby_gpg2 (0.8.0)
       lino (>= 1.5)
-    ruby_parser (3.16.0)
-      sexp_processor (~> 4.15, >= 4.15.1)
+    ruby_parser (3.18.1)
+      sexp_processor (~> 4.16)
     rubyzip (2.3.2)
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
     semantic (1.6.1)
-    sexp_processor (4.15.3)
+    sexp_processor (4.16.0)
     shikashi (0.6.0)
       evalhook (>= 0.6.0)
       getsource (>= 0.1.0)
@@ -147,18 +154,19 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  confidante (~> 0.27)
-  git (~> 1.10)
-  httparty (~> 0.20)
-  rake (~> 13.0)
-  rake_circle_ci (~> 0.9)
-  rake_dependencies (~> 2.13)
-  rake_github (~> 0.7)
-  rake_gpg (~> 0.14)
-  rake_ssh (~> 0.6)
-  rake_terraform (~> 1.21)
-  rspec (~> 3.11)
-  semantic (~> 1.6)
+  confidante
+  git
+  httparty
+  nokogiri
+  rake
+  rake_circle_ci
+  rake_dependencies
+  rake_github
+  rake_gpg
+  rake_ssh
+  rake_terraform
+  rspec
+  semantic
 
 BUNDLED WITH
    2.3.6
