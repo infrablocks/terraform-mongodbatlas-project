@@ -3,6 +3,7 @@
 require 'ruby_terraform'
 require 'ostruct'
 require 'json'
+require 'fileutils'
 
 require_relative '../../lib/configuration'
 
