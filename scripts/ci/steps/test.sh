@@ -22,4 +22,5 @@ git crypt unlock
 
 source config/secrets/ci/mongo-db-atlas-credentials.sh
 
+./go test:unit
 ./go test:integration

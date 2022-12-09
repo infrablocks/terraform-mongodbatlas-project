@@ -1,33 +1,33 @@
 locals {
-  dedicated_teams = {
-    for dedicated_team in var.dedicated_teams:
+  resolved_dedicated_teams = {
+    for dedicated_team in local.dedicated_teams:
       "${var.component}-${var.deployment_identifier}-${dedicated_team.name_suffix}" => dedicated_team
   }
 
-  existing_teams = {
-    for existing_team in var.existing_teams: existing_team.id => existing_team
+  resolved_existing_teams = {
+    for existing_team in local.existing_teams: existing_team.id => existing_team
   }
 
-  cidr_block_entries = {
-    for entry in var.ip_access_list:
+  resolved_cidr_block_entries = {
+    for entry in local.ip_access_list:
         entry.value => entry
     if entry.type == "cidr-block"
   }
 
-  ip_address_entries = {
-    for entry in var.ip_access_list:
+  resolved_ip_address_entries = {
+    for entry in local.ip_access_list:
         entry.value => entry
     if entry.type == "ip-address"
   }
 
-  database_users = {
-    for database_user in var.database_users:
+  resolved_database_users = {
+    for database_user in local.database_users:
       database_user.username => database_user
   }
 }
 
 resource "mongodbatlas_team" "team" {
-  for_each = local.dedicated_teams
+  for_each = local.resolved_dedicated_teams
 
   name   = each.key
   org_id = var.organization_id
@@ -39,7 +39,7 @@ resource "mongodbatlas_project" "project" {
   name = "${var.component}-${var.deployment_identifier}"
 
   dynamic "teams" {
-    for_each = local.dedicated_teams
+    for_each = local.resolved_dedicated_teams
     content {
       team_id = mongodbatlas_team.team[teams.key].team_id
       role_names = teams.value.role_names
@@ -47,7 +47,7 @@ resource "mongodbatlas_project" "project" {
   }
 
   dynamic "teams" {
-    for_each = local.existing_teams
+    for_each = local.resolved_existing_teams
     content {
       team_id = teams.key
       role_names = teams.value.role_names
@@ -56,7 +56,7 @@ resource "mongodbatlas_project" "project" {
 }
 
 resource "mongodbatlas_project_ip_access_list" "cidr_block_entry" {
-  for_each = local.cidr_block_entries
+  for_each = local.resolved_cidr_block_entries
 
   project_id = mongodbatlas_project.project.id
   cidr_block = each.key
@@ -64,7 +64,7 @@ resource "mongodbatlas_project_ip_access_list" "cidr_block_entry" {
 }
 
 resource "mongodbatlas_project_ip_access_list" "ip_address_entry" {
-  for_each = local.ip_address_entries
+  for_each = local.resolved_ip_address_entries
 
   project_id = mongodbatlas_project.project.id
   ip_address = each.key
@@ -72,7 +72,7 @@ resource "mongodbatlas_project_ip_access_list" "ip_address_entry" {
 }
 
 resource "mongodbatlas_database_user" "user" {
-  for_each = local.database_users
+  for_each = local.resolved_database_users
 
   project_id = mongodbatlas_project.project.id
   username = each.key
@@ -90,7 +90,7 @@ resource "mongodbatlas_database_user" "user" {
   }
 
   dynamic "labels" {
-    for_each = merge(local.labels, each.value.labels)
+    for_each = merge(local.resolved_labels, each.value.labels)
     content {
       key = labels.key
       value = labels.value

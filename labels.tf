@@ -4,5 +4,5 @@ locals {
     DeploymentIdentifier = var.deployment_identifier
   }
 
-  labels = merge(var.labels, local.base_labels)
+  resolved_labels = merge(local.labels, local.base_labels)
 }

@@ -1,7 +1,7 @@
 locals {
   existing_teams = {
-  for existing_team in var.existing_teams:
-  existing_team.name => existing_team
+    for existing_team in var.existing_teams:
+      existing_team.name => existing_team
   }
 }
 

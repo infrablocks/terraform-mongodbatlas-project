@@ -5,10 +5,12 @@ variable "organization_id" {}
 
 variable "existing_teams" {
   type = list(object({
+    id: string,
     name: string,
     usernames: list(string)
     role_names: list(string)
   }))
+  default = null
 }
 
 variable "dedicated_teams" {
@@ -17,6 +19,7 @@ variable "dedicated_teams" {
     usernames: list(string)
     role_names: list(string)
   }))
+  default = null
 }
 
 variable "ip_access_list" {
@@ -25,6 +28,7 @@ variable "ip_access_list" {
     value: string,
     comment: string
   }))
+  default = null
 }
 
 variable "database_users" {
@@ -42,4 +46,5 @@ variable "database_users" {
       name: string
     }))
   }))
+  default = null
 }
