@@ -139,8 +139,8 @@ describe 'access' do
     it 'creates a project IP access list entry for each provided' do
       expect(@plan)
         .to(include_resource_creation(
-              type: 'mongodbatlas_project_ip_access_list'
-            )
+          type: 'mongodbatlas_project_ip_access_list'
+        )
               .exactly(4).times)
     end
 
@@ -148,8 +148,8 @@ describe 'access' do
       [@ip_entry1, @ip_entry2].each do |entry|
         expect(@plan)
           .to(include_resource_creation(
-                type: 'mongodbatlas_project_ip_access_list'
-              )
+            type: 'mongodbatlas_project_ip_access_list'
+          )
                 .with_attribute_value(:ip_address, entry[:value]))
       end
     end
@@ -158,8 +158,8 @@ describe 'access' do
       [@cidr_entry1, @cidr_entry2].each do |entry|
         expect(@plan)
           .to(include_resource_creation(
-                type: 'mongodbatlas_project_ip_access_list'
-              )
+            type: 'mongodbatlas_project_ip_access_list'
+          )
                 .with_attribute_value(:cidr_block, entry[:value]))
       end
     end
@@ -171,8 +171,8 @@ describe 'access' do
       ].each do |entry|
         expect(@plan)
           .to(include_resource_creation(
-                type: 'mongodbatlas_project_ip_access_list'
-              )
+            type: 'mongodbatlas_project_ip_access_list'
+          )
                 .with_attribute_value(:comment, entry[:comment]))
       end
     end

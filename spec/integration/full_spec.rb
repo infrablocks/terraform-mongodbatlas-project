@@ -33,7 +33,6 @@ describe 'full' do
     output(role: :full, name: 'database_users')
   end
 
-
   before(:context) do
     apply(role: :full)
   end
@@ -54,7 +53,7 @@ describe 'full' do
 
       project_ip_access_list =
         mongo_db_atlas_client
-          .get_project_ip_access_list(project_id)['results']
+        .get_project_ip_access_list(project_id)['results']
       project_cidr_block_entries = project_ip_access_list.reject do |entry|
         entry['cidrBlock'].nil?
       end
@@ -79,7 +78,7 @@ describe 'full' do
 
       project_ip_access_list =
         mongo_db_atlas_client
-          .get_project_ip_access_list(project_id)['results']
+        .get_project_ip_access_list(project_id)['results']
       project_ip_address_entries = project_ip_access_list.reject do |entry|
         entry['ipAddress'].nil?
       end
@@ -112,16 +111,16 @@ describe 'full' do
     it 'associates the provided dedicated teams to the project' do
       project_teams =
         mongo_db_atlas_client
-          .get_all_teams_assigned_to_project(project_id)['results']
+        .get_all_teams_assigned_to_project(project_id)['results']
 
       dedicated_teams.each do |dedicated_team|
         name_suffix = dedicated_team[:name_suffix]
         created_team =
           mongo_db_atlas_client
-            .get_one_team_by_name(
-              organization_id,
-              "#{component}-#{deployment_identifier}-#{name_suffix}"
-            )
+          .get_one_team_by_name(
+            organization_id,
+            "#{component}-#{deployment_identifier}-#{name_suffix}"
+          )
         matching_team = project_teams.find do |project_team|
           project_team['teamId'] == created_team['id']
         end
@@ -137,15 +136,15 @@ describe 'full' do
     it 'associates the provided existing teams to the project' do
       project_teams =
         mongo_db_atlas_client
-          .get_all_teams_assigned_to_project(project_id)['results']
+        .get_all_teams_assigned_to_project(project_id)['results']
 
       existing_teams.each do |existing_team|
         created_team =
           mongo_db_atlas_client
-            .get_one_team_by_name(
-              organization_id,
-              existing_team[:name]
-            )
+          .get_one_team_by_name(
+            organization_id,
+            existing_team[:name]
+          )
         matching_team = project_teams.find do |project_team|
           project_team['teamId'] == created_team['id']
         end
@@ -165,16 +164,16 @@ describe 'full' do
 
         found_team =
           mongo_db_atlas_client
-            .get_one_team_by_name(
-              organization_id,
-              "#{component}-#{deployment_identifier}-#{name_suffix}"
-            )
+          .get_one_team_by_name(
+            organization_id,
+            "#{component}-#{deployment_identifier}-#{name_suffix}"
+          )
         found_users =
           mongo_db_atlas_client
-            .get_all_users_assigned_to_team(
-              organization_id,
-              found_team['id']
-            )
+          .get_all_users_assigned_to_team(
+            organization_id,
+            found_team['id']
+          )
         found_usernames = found_users['results'].map do |found_user|
           found_user['emailAddress']
         end
@@ -190,10 +189,10 @@ describe 'full' do
         team_name = "#{component}-#{deployment_identifier}-#{name_suffix}"
         found_team =
           mongo_db_atlas_client
-            .get_one_team_by_name(
-              organization_id,
-              team_name
-            )
+          .get_one_team_by_name(
+            organization_id,
+            team_name
+          )
 
         expect(dedicated_team[:id])
           .to(eq(found_team['id']))
@@ -206,7 +205,7 @@ describe 'full' do
       database_users.each do |database_user|
         found_database_user =
           mongo_db_atlas_client
-            .get_one_database_user(project_id, database_user[:username])
+          .get_one_database_user(project_id, database_user[:username])
 
         # required to protect against not found response
         expect(found_database_user['username'])
@@ -218,7 +217,7 @@ describe 'full' do
       database_users.each do |database_user|
         found_database_user =
           mongo_db_atlas_client
-            .get_one_database_user(project_id, database_user[:username])
+          .get_one_database_user(project_id, database_user[:username])
         found_roles = found_database_user['roles']
 
         database_user[:roles].each do |role|
@@ -246,7 +245,7 @@ describe 'full' do
       database_users.each do |database_user|
         found_database_user =
           mongo_db_atlas_client
-            .get_one_database_user(project_id, database_user[:username])
+          .get_one_database_user(project_id, database_user[:username])
         found_labels = found_database_user['labels']
 
         database_user[:labels].each do |key, value|
@@ -263,7 +262,7 @@ describe 'full' do
       database_users.each do |database_user|
         found_database_user =
           mongo_db_atlas_client
-            .get_one_database_user(project_id, database_user[:username])
+          .get_one_database_user(project_id, database_user[:username])
         found_labels = found_database_user['labels']
 
         {
@@ -283,7 +282,7 @@ describe 'full' do
       database_users.each do |database_user|
         found_database_user =
           mongo_db_atlas_client
-            .get_one_database_user(project_id, database_user[:username])
+          .get_one_database_user(project_id, database_user[:username])
         found_scopes = found_database_user['scopes']
 
         database_user[:scopes].each do |scope|

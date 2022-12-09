@@ -89,7 +89,8 @@ describe 'project' do
                     team_id: @existing_team[:id],
                     role_names: @existing_team[:role_names]
                   )
-                )))
+                )
+              ))
     end
   end
 
@@ -133,7 +134,8 @@ describe 'project' do
                     team_id: @existing_team2[:id],
                     role_names: @existing_team2[:role_names]
                   )
-                )))
+                )
+              ))
     end
   end
 
@@ -179,7 +181,8 @@ describe 'project' do
                     role_names:
                       containing_exactly(*@dedicated_team[:role_names])
                   )
-                )))
+                )
+              ))
     end
   end
 
@@ -220,7 +223,8 @@ describe 'project' do
                     role_names:
                       containing_exactly(*@dedicated_team2[:role_names])
                   )
-                )))
+                )
+              ))
     end
   end
 end

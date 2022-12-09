@@ -84,7 +84,8 @@ describe 'teams' do
                 containing_exactly(
                   'toby+user1@go-atomic.io',
                   'toby+user2@go-atomic.io'
-                )))
+                )
+              ))
     end
   end
 

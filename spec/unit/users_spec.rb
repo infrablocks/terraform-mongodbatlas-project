@@ -105,7 +105,8 @@ describe 'users' do
                     database_name: 'specific',
                     collection_name: 'things'
                   )
-                )))
+                )
+              ))
     end
 
     it 'adds each of the provided labels to the user' do
@@ -122,7 +123,8 @@ describe 'users' do
                     key: 'something',
                     value: 'else'
                   )
-                )))
+                )
+              ))
     end
 
     it 'adds labels for component and deployment identifier to the user' do
@@ -139,7 +141,8 @@ describe 'users' do
                     key: 'DeploymentIdentifier',
                     value: deployment_identifier
                   )
-                )))
+                )
+              ))
     end
 
     it 'adds each of the scopes to the user' do
@@ -232,7 +235,8 @@ describe 'users' do
         expect(@plan)
           .to(include_resource_creation(type: 'mongodbatlas_database_user')
                 .with_attribute_value(
-                  :roles, containing_exactly(*role_matchers)))
+                  :roles, containing_exactly(*role_matchers)
+                ))
       end
     end
 
@@ -247,7 +251,8 @@ describe 'users' do
         expect(@plan)
           .to(include_resource_creation(type: 'mongodbatlas_database_user')
                 .with_attribute_value(
-                  :labels, a_collection_including(*label_matchers)))
+                  :labels, a_collection_including(*label_matchers)
+                ))
       end
     end
 
@@ -278,7 +283,8 @@ describe 'users' do
         expect(@plan)
           .to(include_resource_creation(type: 'mongodbatlas_database_user')
                 .with_attribute_value(
-                  :scopes, a_collection_including(*scope_matchers)))
+                  :scopes, a_collection_including(*scope_matchers)
+                ))
       end
     end
   end
