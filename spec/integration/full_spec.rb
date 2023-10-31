@@ -127,7 +127,7 @@ describe 'full' do
 
         expect(matching_team).not_to(be_nil)
         expect(matching_team['roleNames'])
-          .to(contain_exactly(*dedicated_team[:role_names]))
+          .to(match_array(dedicated_team[:role_names]))
       end
     end
     # rubocop:enable RSpec/MultipleExpectations
@@ -151,7 +151,7 @@ describe 'full' do
 
         expect(matching_team).not_to(be_nil)
         expect(matching_team['roleNames'])
-          .to(contain_exactly(*existing_team[:role_names]))
+          .to(match_array(existing_team[:role_names]))
       end
     end
     # rubocop:enable RSpec/MultipleExpectations
@@ -179,7 +179,7 @@ describe 'full' do
         end
 
         expect(found_usernames)
-          .to(contain_exactly(*dedicated_team[:usernames]))
+          .to(match_array(dedicated_team[:usernames]))
       end
     end
 
